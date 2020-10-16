@@ -15,7 +15,8 @@ body {
 
 .message {
   &__not-found,
-  &__empty-library {
+  &__empty-library,
+  &__empty-wishlist {
     font-size: 1.6rem;
   }
 }

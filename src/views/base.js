@@ -12,6 +12,9 @@ export const elements = {
   likesMenu: document.querySelector('.likes__field'),
   libList: document.querySelector('.library__books'),
   library: document.querySelector('.library'),
+  wishlist: document.querySelector('.wishlist'),
+  wishlistList: document.querySelector('.wishlist__books'),
+  wishlistNavBtn: document.querySelector('.nav__btn--wishlist'),
   initialContent: document.querySelector('.content'),
   initialContentLinks: document.querySelectorAll('.content__link'),
   advancedSearch: document.querySelector('.advanced-search'),
@@ -19,10 +22,12 @@ export const elements = {
   advancedSearchNavBtn: document.querySelector('.nav__btn--advanced'),
   btnBackAdvancedSearch: document.querySelector('.advanced-search__btn--back'),
   btnBackLibrary: document.querySelector('.library__btn--back'),
+  btnBackWishlist: document.querySelector('.wishlist__btn--back'),
   homeNavBtn: document.querySelector('.nav__btn--home'),
   advancedSearchForm: document.querySelector('.advanced__form'),
   errorMessage: document.querySelector('.message__error'),
   emptyLibraryMessage: document.querySelector('.message__empty-library'),
+  emptyWishlistMessage: document.querySelector('.message__empty-wishlist'),
   resultsPrevBtn: document.querySelector('.results__btn--prev'),
   resultsMoreBtn: document.querySelector('.results__btn--more'),
 };
@@ -63,6 +68,7 @@ const mainPageElements = [
   elements.advancedSearch,
   elements.book,
   elements.searchRes,
+  elements.wishlist,
 ];
 
 let lastPageVisited = 'initialContent';
@@ -109,6 +115,12 @@ export const showAdvancedSearchPage = () => {
   updateLastPageVisited('advancedSearch');
 };
 
+export const showWishlistPage = () => {
+  removeAllElementsFromDisplay();
+  elements.wishlist.style.display = 'block';
+  updateLastPageVisited('wishlist');
+};
+
 export const goBack = () => {
   switch (lastPageVisited) {
     case 'initialContent':
@@ -122,6 +134,9 @@ export const goBack = () => {
       break;
     case 'library':
       showLibraryPage();
+      break;
+    case 'wishlist':
+      showWishlistPage();
       break;
     default:
       showBooksPage();

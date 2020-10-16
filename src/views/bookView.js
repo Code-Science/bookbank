@@ -1,11 +1,11 @@
-import { elements } from './base';
+import { elements, showBooksPage, showRelevantResults } from './base';
 import bookImage from '../assets/book.jpg';
 
 export const clearPrevBook = () => {
   elements.bookContent.innerHTML = '';
 };
 
-export const renderBook = (bookObj, inLibrary) => {
+export const renderBook = (bookObj, inLibrary, inWishlist) => {
   const markup = `
             <h1 class="book__title">
                  <span>${bookObj.volumeInfo.title}</span>
@@ -78,20 +78,50 @@ export const renderBook = (bookObj, inLibrary) => {
             <div class="book__buttons">
             ${
               bookObj.accessInfo.viewability !== 'NO_PAGES'
-                ? `<a href=${bookObj.accessInfo.webReaderLink} class="book__btn--preview btn btn--gray">Read</a>`
+                ? `<a href=${bookObj.accessInfo.webReaderLink} class="book__btn--preview btn btn--gray" target="_blank">Read</a>`
                 : ''
             }
                 
               ${
                 bookObj.saleInfo.saleability === 'FOR_SALE'
-                  ? `<a href=${bookObj.saleInfo.buyLink} class="book__btn--buy btn btn--pink">Buy now</a>`
+                  ? `<a href=${bookObj.saleInfo.buyLink} class="book__btn--buy btn btn--pink" target="_blank">Buy now</a>`
                   : ``
               }  
+                ${
+                  bookObj.accessInfo.viewability !== 'NO_PAGES'
+                    ? `
                 <button class="book__btn--library btn btn--pink">
                     ${inLibrary ? 'Remove from library' : 'Add to my library'}
                 </button>
+                `
+                    : `
+                <button class="book__btn--wishlist btn btn--pink">
+                    ${inWishlist ? 'Remove from wishlist' : 'Add to wishlist'}
+                </button>
+                `
+                }
             </div>
 `;
 
   elements.bookContent.insertAdjacentHTML('afterbegin', markup);
+};
+
+// show book view from library or wishlist by clicking on book
+export const showBookView = (event, libraryOrWishlist) => {
+  if (
+    event.target.matches(
+      `.${libraryOrWishlist}__link, .${libraryOrWishlist}__link *`
+    )
+  ) {
+    showBooksPage();
+    window.scrollTo(0, 300);
+    if (
+      event.target.parentElement.parentElement.matches(
+        `.${libraryOrWishlist}__link`
+      )
+    )
+      showRelevantResults(event.target.parentElement.parentElement);
+    else if (event.target.parentElement.matches(`.${libraryOrWishlist}__link`))
+      showRelevantResults(event.target.parentElement);
+  }
 };

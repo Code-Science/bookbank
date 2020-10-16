@@ -125,6 +125,20 @@ export const getadditionalInputValues = () => {
   return obj;
 };
 
+// clear advanced search inputs
+
+export const resetAdvancedSearchInputs = () => {
+  advancedSearchInputs.keywords.value = '';
+  advancedSearchInputs.title.value = '';
+  advancedSearchInputs.author.value = '';
+  advancedSearchInputs.publisher.value = '';
+  advancedSearchInputs.subject.value = '';
+  advancedSearchInputs.isbn.value = '';
+  document.getElementById('radiofilterAll').checked = true;
+  document.getElementById('radioAll').checked = true;
+  document.getElementById('radioRelevance').checked = true;
+};
+
 // check if user provided or entered required values in advanced search form.
 export const checkValidity = () => {
   const standardValues = getStandardInputValues();

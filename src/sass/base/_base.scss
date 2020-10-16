@@ -24,7 +24,8 @@ body {
     display: none;
   }
 
-  &__empty-library {
+  &__empty-library,
+  &__empty-wishlist {
     text-align: center;
     display: none;
   }

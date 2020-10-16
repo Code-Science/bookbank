@@ -4,6 +4,7 @@ import Library from './models/Library';
 import * as resultsView from './views/resultsView';
 import * as bookView from './views/bookView';
 import * as libraryView from './views/libraryView';
+import * as wishlistView from './views/wishlistView';
 import {
   elements,
   renderSpinner,
@@ -12,6 +13,7 @@ import {
   showLibraryPage,
   showAdvancedSearchPage,
   showInitialPage,
+  showWishlistPage,
   goBack,
   showErrorMessage,
   hideErrorMessage,
@@ -128,7 +130,8 @@ const specificRequestControl = async () => {
     clearSpinner();
     bookView.renderBook(
       state.specificRequest.result,
-      state.library.inLibrary(id)
+      state.library.inLibrary(id),
+      state.wishlist.inLibrary(id)
     );
   }
 };
@@ -163,7 +166,7 @@ const advancedSearchControl = async () => {
       // create new search instance and add to state
       state.search = new Caller(queryObj, 'general');
       // cleaning previous searches
-      resultsView.clearInput();
+      resultsView.resetAdvancedSearchInputs();
       resultsView.clearResults();
       renderSpinner(elements.searchRes);
       // Get search results according to the query made.
@@ -212,14 +215,16 @@ elements.resultsPrevBtn.addEventListener('click', (event) => {
 });
 
 /*
-// Handling the functionality of adding books to 'my library'.
+// Handling the functionality of adding books to 'my library' and WISHLIST.
 */
 
-// Restore library on page load from localStorage
+// Restore library and wishlist on page load from localStorage
 window.addEventListener('load', () => {
   // Creating Library
-  state.library = new Library();
+  state.library = new Library('library');
+  state.wishlist = new Library('wishlist'); // because both have same model
   state.library.readStorage();
+  state.wishlist.readStorage();
 
   // Render Existing Books in library
   if (state.library.itemsArray.length > 0) {
@@ -229,25 +234,61 @@ window.addEventListener('load', () => {
   } else {
     libraryView.showEmptyLibraryMessage();
   }
+
+  // Render Existing Books in wishlist
+
+  if (state.wishlist.itemsArray.length > 0) {
+    state.wishlist.itemsArray.forEach((book) =>
+      wishlistView.renderWishlistBooks(book)
+    );
+  } else {
+    wishlistView.showEmptyWishlistMessage();
+  }
 });
 
-const libraryControl = () => {
+// LIBRARY CONTROL
+
+const getCurrentBookDetails = () => {
+  const currentBookObj = state.specificRequest.result;
+  const authors = currentBookObj.volumeInfo.authors
+    ? currentBookObj.volumeInfo.authors.join(', ')
+    : ' ';
+  const image = currentBookObj.volumeInfo.imageLinks
+    ? currentBookObj.volumeInfo.imageLinks.thumbnail
+    : null;
+
+  const { title } = currentBookObj.volumeInfo;
+
+  const readLink =
+    currentBookObj.accessInfo.viewability !== 'NO_PAGES'
+      ? currentBookObj.accessInfo.webReaderLink
+      : '';
+
+  return {
+    authors,
+    image,
+    title,
+    readLink,
+  };
+};
+
+const libraryControl = (id = null) => {
   // if book not added in library then add it
-  const currentId = state.specificRequest.idObj.id;
-  if (!state.library.inLibrary(currentId)) {
-    const currentBookObj = state.specificRequest.result;
-    const authors = currentBookObj.volumeInfo.authors
-      ? currentBookObj.volumeInfo.authors.join(', ')
-      : ' ';
-    const image = currentBookObj.volumeInfo.imageLinks
-      ? currentBookObj.volumeInfo.imageLinks.thumbnail
-      : null;
+  let currentId;
+  if (id) {
+    currentId = id;
+  } else {
+    currentId = state.specificRequest.idObj.id;
+  }
+  if (!id && !state.library.inLibrary(currentId)) {
+    const obj = getCurrentBookDetails();
 
     const newAddition = state.library.addItem(
       currentId,
-      currentBookObj.volumeInfo.title,
-      authors,
-      image
+      obj.title,
+      obj.authors,
+      obj.image,
+      obj.readLink
     );
     libraryView.hideEmptyLibraryMessage();
     libraryView.renderLibraryBooks(newAddition);
@@ -269,20 +310,70 @@ const libraryControl = () => {
    for this purpose, we will add event listener on parent element 'book' and then use the event matches method to target the 
    specific child element */
 
-elements.libList.addEventListener('click', (event) => {
-  if (event.target.matches('.library__link, .library__link *')) {
-    showBooksPage();
-    window.scrollTo(0, 300);
-    if (event.target.parentElement.parentElement.matches('.library__link'))
-      showRelevantResults(event.target.parentElement.parentElement);
-    else if (event.target.parentElement.matches('.library__link'))
-      showRelevantResults(event.target.parentElement);
-  }
-});
-
 elements.book.addEventListener('click', (event) => {
   if (event.target.matches('.book__btn--library')) {
     libraryControl();
+  }
+});
+
+elements.libList.addEventListener('click', (e) => {
+  bookView.showBookView(e, 'library');
+  if (e.target.matches('.library__btn--delete')) {
+    const id = e.target.getAttribute('id');
+    libraryControl(id);
+  }
+});
+
+/*
+// WISHLIST CONTROL.
+*/
+
+const wishlistControl = (id = null) => {
+  // if book not added in wishlist then add it
+
+  let currentId;
+  if (id) {
+    currentId = id;
+  } else {
+    currentId = state.specificRequest.idObj.id;
+  }
+
+  if (!id && !state.wishlist.inLibrary(currentId)) {
+    const obj = getCurrentBookDetails();
+
+    const newAddition = state.wishlist.addItem(
+      currentId,
+      obj.title,
+      obj.authors,
+      obj.image
+    );
+    wishlistView.hideEmptyWishlistMessage();
+    wishlistView.renderWishlistBooks(newAddition);
+    wishlistView.toggleAddToWishlistBtn(true);
+  } else {
+    // if book is in wishlist then, remove it
+
+    state.wishlist.deleteItem(currentId);
+    wishlistView.toggleAddToWishlistBtn(false);
+
+    wishlistView.deleteWishlistBook(currentId);
+    if (state.wishlist.itemsArray.length === 0) {
+      wishlistView.showEmptyWishlistMessage();
+    }
+  }
+};
+
+elements.book.addEventListener('click', (event) => {
+  if (event.target.matches('.book__btn--wishlist')) {
+    wishlistControl();
+  }
+});
+
+elements.wishlistList.addEventListener('click', (e) => {
+  bookView.showBookView(e, 'wishlist');
+  if (e.target.matches('.wishlist__btn--delete')) {
+    const id = e.target.getAttribute('id');
+    wishlistControl(id);
   }
 });
 
@@ -305,11 +396,20 @@ elements.homeNavBtn.addEventListener('click', (event) => {
   showInitialPage();
 });
 
+elements.wishlistNavBtn.addEventListener('click', (event) => {
+  event.preventDefault();
+  showWishlistPage();
+});
+
 /*
    Back Buttons Functionality from library and advanced search page
 */
 
-[elements.btnBackLibrary, elements.btnBackAdvancedSearch].forEach((el) => {
+[
+  elements.btnBackLibrary,
+  elements.btnBackAdvancedSearch,
+  elements.btnBackWishlist,
+].forEach((el) => {
   el.addEventListener('click', (event) => {
     event.preventDefault();
     goBack();

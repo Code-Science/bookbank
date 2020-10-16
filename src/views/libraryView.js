@@ -3,7 +3,8 @@ import bookImage from '../assets/book.jpg';
 
 export const toggleAddToLibraryBtn = (inLibrary) => {
   const text = inLibrary ? 'Remove from library' : 'Add to my library';
-  document.querySelector('.book__btn--library').innerText = text;
+  const btn = document.querySelector('.book__btn--library');
+  if (btn) btn.innerText = text;
 };
 
 export const renderLibraryBooks = (book) => {
@@ -24,6 +25,17 @@ export const renderLibraryBooks = (book) => {
                 <p class="library__author">${book.author}</p>
               </div>
             </a>
+            <div>
+            ${
+              book.readLink
+                ? `
+                  <a href=${book.readLink} class="library__btn library__read-link btn btn--pink" target="_blank">Read</a>`
+                : ''
+            }
+              <button class="library__btn library__btn--delete btn btn--gray" id="${
+                book.id
+              }">Remove</button>
+            </div>
         </div>
     `;
 

@@ -1,16 +1,18 @@
 class Library {
   // control all the my library functionality
-  constructor() {
+  constructor(name) {
     this.itemsArray = [];
+    this.name = name;
   }
 
-  addItem(id, title, author, img) {
+  addItem(id, title, author, img, readLink = '') {
     const obj = {
       id,
       title,
       author,
       img,
     };
+    if (readLink) obj.readLink = readLink;
     this.itemsArray.push(obj);
 
     // Persisting data in localstorage
@@ -39,11 +41,13 @@ class Library {
   }
 
   persistData() {
-    localStorage.setItem('library', JSON.stringify(this.itemsArray));
+    if (typeof this.name === 'string') {
+      localStorage.setItem(this.name, JSON.stringify(this.itemsArray));
+    }
   }
 
   readStorage() {
-    const items = JSON.parse(localStorage.getItem('library'));
+    const items = JSON.parse(localStorage.getItem(this.name));
 
     // Restoring from localStorage
     if (items) {
