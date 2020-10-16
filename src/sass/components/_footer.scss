@@ -1,0 +1,22 @@
+.footer {
+  background-color: $color-gray-dark;
+  color: white;
+  grid-column: full-start / full-end;
+  padding: 4rem;
+}
+
+.nav {
+  &__link:link,
+  &__link:visited {
+    font-size: 1.4rem;
+    color: rgb(189, 187, 187);
+    transition: all 0.2s;
+    padding: 1rem 2rem;
+  }
+
+  &__link:hover,
+  &__link:active {
+    transform: scale(1.1);
+    background-color: rgba(#fff, 0.05);
+  }
+}

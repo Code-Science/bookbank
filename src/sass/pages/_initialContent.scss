@@ -1,0 +1,24 @@
+.content {
+  grid-column: center-start / center-end;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 17rem 0rem;
+  grid-row-gap: 6rem;
+  // display: none;
+
+  &__book {
+    margin: auto;
+    transition: all 0.2s;
+    &:hover {
+      transform: translateY(-2%) scale(1.03);
+    }
+  }
+
+  &__author {
+    color: $color-gray-dark;
+    text-decoration: underline;
+  }
+  &__price {
+    color: $color-primary;
+  }
+}

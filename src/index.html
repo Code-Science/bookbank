@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Acme&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+    <title>BookBank</title>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <div class="header__background">BookBank</div>
+        <div class="header__front">
+          <nav class="nav">
+            <div class="nav__logo">BookBank</div>
+            <ul class="nav__navigation">
+              <li class="nav__item">
+                <button class="nav__btn nav__btn--home btn">Home</button>
+              </li>
+              <li class="nav__item">
+                <button class="nav__btn nav__btn--advanced btn">Advanced Search</button>
+              </li>
+              <li class="nav__item">
+                <button class="nav__btn nav__btn--library btn">My Library</button>
+              </li>
+              <li class="nav__item">
+                <button class="nav__btn btn">Contact</button>
+              </li>
+            </ul>
+          </nav>
+          <div class="heading">
+            <h3 class="heading__main">
+              Your favourite site to find or search books and magazines.
+            </h3>
+          </div>
+          <div class="random-book">
+            <figure class="random-book__photo">
+              <img
+                class="random-book__img"
+                src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1413706054l/18007564.jpg"
+                alt="book picture"
+              />
+              <figcaption class="random-book__caption">
+                The Martian <br />
+                by Andy Weir
+              </figcaption>
+            </figure>
+          </div>
+          <div class="search">
+            <form class="search__form">
+              <button type="menu" disabled class="search__btn--category btn btn--gray">All</button>
+              <div class="search__popup">
+                <ul class="search__list">
+                  <li class="search__item search__item--selected">all</li>
+                  <li class="search__item">books</li>
+                  <li class="search__item">magazines</li>
+                  <li class="search__item">ebooks</li>
+                  <li class="search__item">free-ebooks</li>
+                  <li class="search__item">paid-ebooks</li>
+                  <li class="search__item">relevance</li>
+                  <li class="search__item">newest</li>
+                </ul>
+              </div>
+              <input
+                type="text"
+                class="search__field"
+                placeholder="Enter keyword, title, author or ISBN"
+                required
+              />
+              <button type="submit" class="search__btn--main btn btn--gray">Search</button>
+            </form>
+          </div>
+        </div>
+      </header>
+
+      <!-- Advanced Search elements-->
+
+      <div class="advanced-search">
+        <button class="advanced-search__btn--back btn btn--pink">Back</button>
+        <h2 class="advanced-search__heading heading__2">Advanced Search</h2>
+        <div class="advanced">
+          <div class="message">
+              <p class="message__error">Please enter at least one search term.</p>
+          </div>
+          <form class="advanced__form">
+            <div class="advanced__form-group">
+              <label for="inputAuthor" class="advanced__label">Author</label>
+                <input type="text" class="advanced__input" id="inputAuthor">
+            </div>
+            <div class="advanced__form-group">
+              <label for="inputTitle" class="advanced__label">Title</label>
+                <input type="text" class="advanced__input" id="inputTitle">
+            </div>
+            <div class="advanced__form-group">
+              <label for="inputISBN" class="advanced__label">ISBN</label>
+                <input type="text" class="advanced__input" id="inputISBN">
+            </div>
+            <div class="advanced__form-group">
+              <label for="inputKeywords" class="advanced__label">Keywords</label>
+                <input type="text" class="advanced__input" id="inputKeywords">
+            </div>
+            <p class="advanced__paragraph">Please provide at least one of author, title, ISBN, keyword or publisher.</p>
+            <hr/>
+            <div class="advanced__form-group">
+              <label for="inputPublisher" class="advanced__label">Publisher</label>
+                <input type="text" class="advanced__input" id="inputPublisher">
+            </div>
+            <div class="advanced__form-group">
+              <label for="inputCategory" class="advanced__label">Category</label>
+                <input type="text" class="advanced__input" id="inputCategory">
+            </div>
+            <hr/>
+            <fieldset class="advanced__form-group">
+                <p class="advanced__radioStatement">Filter</p>
+                <div class="advanced__radioOptions">
+                  <div class="advanced__form-check">
+                    <input class="advanced__radioInput" type="radio" name="filter" id="radiofilterAll" value="" checked>
+                    <label class="advanced__label-radio" for="radiofilterAll">
+                      All
+                    </label>
+                  </div>
+                  <div class="advanced__form-check">
+                    <input class="advanced__radioInput" type="radio" name="filter" id="radioPartial" value="partial">
+                    <label class="advanced__label-radio" for="radioPartial">
+                      Partially viewable
+                    </label>
+                  </div>
+                  <div class="advanced__form-check">
+                    <input class="advanced__radioInput" type="radio" name="filter" id="radioFull" value="full" >
+                    <label class="advanced__label-radio" for="radioFull">
+                      Fully viewable
+                    </label>
+                  </div>
+                  <div class="advanced__form-check">
+                    <input class="advanced__radioInput" type="radio" name="filter" id="radioFree" value="free-ebooks" >
+                    <label class="advanced__label-radio" for="radioFree">
+                      Free-ebooks
+                    </label>
+                  </div>
+                  <div class="advanced__form-check">
+                    <input class="advanced__radioInput" type="radio" name="filter" id="radioPaid" value="paid-ebooks">
+                    <label class="advanced__label-radio" for="radioPaid">
+                      Paid-ebooks
+                    </label>
+                  </div>
+                  <div class="advanced__form-check">
+                    <input class="advanced__radioInput" type="radio" name="filter" id="radioEbooks" value="ebooks">
+                    <label class="advanced__label-radio" for="radioEbooks">
+                      Ebooks
+                    </label>
+                  </div>
+                </div>
+            </fieldset>
+            <fieldset class="advanced__form-group">
+              <p class="advanced__radioStatement">Print Type</p>
+              <div class="advanced__radioOptions">
+                <div class="advanced__form-check">
+                  <input class="advanced__radioInput" type="radio" name="printType" id="radioAll" value="all" checked>
+                  <label class="advanced__label-radio" for="radioAll">
+                    All
+                  </label>
+                </div>
+                <div class="advanced__form-check">
+                  <input class="advanced__radioInput" type="radio" name="printType" id="radioBooks" value="books" >
+                  <label class="advanced__label-radio" for="radioBooks">
+                    Books
+                  </label>
+                </div>
+                <div class="advanced__form-check">
+                  <input class="advanced__radioInput" type="radio" name="printType" id="radioMagazines" value="magazines" >
+                  <label class="advanced__label-radio" for="radioMagazines">
+                    Magazines
+                  </label>
+                </div>
+              </div>
+            </fieldset>
+            <hr/>
+            <fieldset class="advanced__form-group">
+              <p class="advanced__radioStatement">Sorting Order</p>
+              <div class="advanced__radioOptions">
+                <div class="advanced__form-check">
+                  <input class="advanced__radioInput" type="radio" name="orderBy" id="radioRelevance" value="relevance" checked>
+                  <label class="advanced__label-radio" for="radioRelevance">
+                    Relevance
+                  </label>
+                </div>
+                <div class="advanced__form-check">
+                  <input class="advanced__radioInput" type="radio" name="orderBy" id="radioNewest" value="newest" >
+                  <label class="advanced__label-radio" for="radioNewest">
+                    Newest
+                  </label>
+                </div>
+              </div>
+            </fieldset>
+            <button type="submit" class="advanced__btn btn btn--pink">Find Book</button>
+          </form>
+        </div>
+        
+      </div>
+
+      <!-- SOME CONTENT THAT WOULD BE DISPLAYED WHEN PAGE IS VISITED INITIALLY -->
+      <div class="content">
+        <div class="content__book">
+          <a
+            class="content__link"
+            href="#NpOqDwAAQBAJ"
+          >
+            <figure class="content__fig">
+              <img
+                src="http://books.google.com/books/content?id=55AFYh5XadkC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api"
+                alt="pride and prejudice"
+              />
+            </figure>
+            <div class="content__data">
+              <h4 class="heading-4">Pride and Prejudice</h4>
+              <p class="content__author">Jane Austen</p>
+              <p class="content__price">Free</p>
+            </div>
+          </a>
+        </div>
+        <div class="content__book">
+          <a
+            class="content__link"
+            href="#q7yZDwAAQBAJ"
+          >
+            <figure class="content__fig">
+              <img
+                src="http://books.google.com/books/content?id=q7yZDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+                alt="The Thursday Murder Club"
+              />
+            </figure>
+            <div class="content__data">
+              <h4 class="heading-4">The Thursday Murder Club</h4>
+              <p class="content__author">Richard Osman</p>
+              <p class="content__price">£9.99</p>
+            </div>
+          </a>
+        </div>
+        <div class="content__book">
+          <a
+            class="content__link"
+            href="#tVnMDwAAQBAJ"
+          >
+            <figure class="content__fig">
+              <img
+                src="http://books.google.com/books/content?id=tVnMDwAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+                alt="dearly"
+              />
+            </figure>
+            <div class="content__data">
+              <h4 class="heading-4">Dearly (Poems)</h4>
+              <p class="content__author">Margaret Atwood</p>
+              <p class="content__price">£9.99</p>
+            </div>
+          </a>
+        </div>
+        <div class="content__book">
+          <a
+            class="content__link"
+            href="#ZcgiDAAAQBAJ"
+          >
+            <figure class="content__fig">
+              <img
+                src="http://books.google.com/books/content?id=ZcgiDAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+                alt="Two by Two"
+              />
+            </figure>
+            <div class="content__data">
+              <h4 class="heading-4">Two by Two</h4>
+              <p class="content__author">Nicholas Sparks</p>
+              <p class="content__price">£4.99</p>
+            </div>
+          </a>
+        </div>
+        <div class="content__book">
+          <a
+            class="content__link"
+            href="#ypb9DwAAQBAJ"
+          >
+            <figure class="content__fig">
+              <img
+                src="http://books.google.com/books/content?id=ypb9DwAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+                alt="A Promised Land"
+              />
+            </figure>
+            <div class="content__data">
+              <h4 class="heading-4">A Promised Land</h4>
+              <p class="content__author">Barack Obama</p>
+              <p class="content__price">£15.99</p>
+            </div>
+          </a>
+        </div>
+        <div class="content__book">
+          <a
+            class="content__link"
+            href="#b1lHDwAAQBAJ"
+          >
+            <figure class="content__fig">
+              <img
+                src="http://books.google.com/books/content?id=addUygEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+                alt="The Salt Path"
+              />
+            </figure>
+            <div class="content__data">
+              <h4 class="heading-4">The Salt Path</h4>
+              <p class="content__author">Raynor Winn</p>
+              <p class="content__price">£4.99</p>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- RESULTS OF BOOK SEARCH -->
+      <div class="results">
+        <ul class="results__list">
+          <!-- <li>
+            <a class="results__link results__link--active" href="#23456">
+              <figure class="results__fig">
+                <img
+                  src="http://books.google.com/books/content?id=addUygEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+                  alt="Test"
+                  class="results__img"
+                />
+              </figure>
+              <div class="results__data">
+                <h4 class="results__name">The salt path</h4>
+                <p class="results__author">Raynor Winn</p>
+              </div>
+            </a>
+          </li>
+
+          <li>
+            <a class="results__link" href="#76767">
+              <figure class="results__fig">
+                <img
+                  src="http://books.google.com/books/content?id=ZcgiDAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+                  alt="Test"
+                  class="results__img"
+                />
+              </figure>
+              <div class="results__data">
+                <h4 class="results__name">Two by two</h4>
+                <p class="results__author">Nicholas Sparks</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a class="results__link" href="#23456">
+              <figure class="results__fig">
+                <img
+                  src="http://books.google.com/books/content?id=addUygEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+                  alt="Test"
+                  class="results__img"
+                />
+              </figure>
+              <div class="results__data">
+                <h4 class="results__name">The salt path</h4>
+                <p class="results__author">Raynor Winn</p>
+              </div>
+            </a>
+          </li>
+
+          <li>
+            <a class="results__link" href="#76767">
+              <figure class="results__fig">
+                <img
+                  src="http://books.google.com/books/content?id=ZcgiDAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+                  alt="Test"
+                  class="results__img"
+                />
+              </figure>
+              <div class="results__data">
+                <h4 class="results__name">Two by two</h4>
+                <p class="results__author">Nicholas Sparks</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a class="results__link" href="#23456">
+              <figure class="results__fig">
+                <img
+                  src="http://books.google.com/books/content?id=addUygEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+                  alt="Test"
+                  class="results__img"
+                />
+              </figure>
+              <div class="results__data">
+                <h4 class="results__name">The salt path</h4>
+                <p class="results__author">Raynor Winn</p>
+              </div>
+            </a>
+          </li>
+
+          <li>
+            <a class="results__link" href="#76767">
+              <figure class="results__fig">
+                <img
+                  src="http://books.google.com/books/content?id=ZcgiDAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+                  alt="Test"
+                  class="results__img"
+                />
+              </figure>
+              <div class="results__data">
+                <h4 class="results__name">Two by two</h4>
+                <p class="results__author">Nicholas Sparks</p>
+              </div>
+            </a>
+          </li> -->
+        </ul>
+        <div class="results__pagination">
+            <button class="results__btn results__btn--prev btn btn--pink">Prev</button>
+            <button class="results__btn results__btn--more btn btn--pink">See more</button>         
+        </div>
+      </div>
+
+      <div class="book">
+        <div class="book__content">
+          
+        </div>
+        <!-- <h1 class="book__title">
+          <span>The Salt Path</span>
+        </h1>
+        <div class="book__data">
+          <figure class="book__fig">
+            <img
+              src="http://books.google.com/books/content?id=addUygEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+              alt="The salt path"
+              class="book__img"
+            />
+          </figure>
+          <div class="book__details">
+            <p class="book__author">Raynor winn</p>
+            <p class="book__publisher">publisher, date, pages</p>
+            <p class="book__ISBN">ISBN: 1785418033, 9781785418037</p>
+            <div class="book__rating">rating</div>
+            <p class="book__category">Large type books</p>
+            <p class="book__text">
+              THE SALT PATH is an honest and life-affirming true story of coming
+              to terms with grief and the healing power of the natural world.
+            </p>
+          </div>
+        </div>
+
+        <div class="book__description">
+          <h3>Description</h3>
+          <p>
+            Just days after Raynor learns that Moth, her husband of 32 years, is
+            terminally ill, their home is taken away and they lose their
+            livelihood. With nothing left and little time, they make the brave
+            and impulsive decision to walk the 630 miles of the sea-swept South
+            West Coast Path. Carrying only the essentials for survival on their
+            backs, they live wild in the ancient, weathered landscape of cliffs,
+            sea and sky. Yet through every step, every encounter and every test
+            along the way, their walk becomes a remarkable journey. THE SALT
+            PATH is an honest and life-affirming true story of coming to terms
+            with grief and the healing power of the natural world. Ultimately,
+            it is a portrayal of home, and how it can be lost, rebuilt and
+            rediscovered in the most unexpected ways.
+          </p>
+        </div>
+
+        <div class="book__buttons">
+          <button class="book__btn--preview btn btn--gray">Preview</button>
+          <button class="book__btn--buy btn btn--pink">Buy now</button>
+          <button class="book__btn--buy btn btn--pink">
+            Add to my library
+          </button>
+        </div> -->
+      </div>
+
+      <div class="library">
+        <h2 class="library__heading heading__2">My Library</h2>
+        <button class="library__btn--back btn btn--pink">Back</button>
+        <div class="message">
+          <p class="message__empty-library">Your library is empty</p>
+        </div>
+        <div class="library__books">
+          <!-- <div class="library__book">
+            <a
+              class="library__link"
+              href="https://play.google.com/store/books/details/Jane_Austin_Pride_and_Prejudice?id=NpOqDwAAQBAJ"
+            >
+              <figure class="library__fig">
+                <img
+                  src="http://books.google.com/books/content?id=55AFYh5XadkC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api"
+                  alt="pride and prejudice"
+                />
+              </figure>
+              <div class="library__data">
+                <h4 class="heading-4">Pride and Prejudice</h4>
+                <p class="library__author">Jane Austen</p>
+              </div>
+            </a>
+          </div>
+          <div class="library__book">
+            <a
+              class="library__link"
+              href="https://play.google.com/store/books/details?id=q7yZDwAAQBAJ&rdid=book-q7yZDwAAQBAJ&rdot=1&source=gbs_api"
+            >
+              <figure class="library__fig">
+                <img
+                  src="http://books.google.com/books/content?id=q7yZDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+                  alt="The Thursday Murder Club"
+                />
+              </figure>
+              <div class="library__data">
+                <h4 class="heading-4">The Thursday Murder Club</h4>
+                <p class="library__author">Richard Osman</p>
+              </div>
+            </a>
+          </div>
+          <div class="library__book">
+            <a
+              class="library__link"
+              href="https://play.google.com/store/books/details/Margaret_Atwood_Dearly?id=tVnMDwAAQBAJ"
+            >
+              <figure class="library__fig">
+                <img
+                  src="http://books.google.com/books/content?id=tVnMDwAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+                  alt="dearly"
+                />
+              </figure>
+              <div class="library__data">
+                <h4 class="heading-4">Dearly (Poems)</h4>
+                <p class="library__author">Margaret Atwood</p>
+              </div>
+            </a>
+          </div>
+          <div class="library__book">
+            <a
+              class="library__link"
+              href="https://play.google.com/store/books/details/Nicholas_Sparks_Two_by_Two?id=ZcgiDAAAQBAJ"
+            >
+              <figure class="library__fig">
+                <img
+                  src="http://books.google.com/books/content?id=ZcgiDAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+                  alt="Two by Two"
+                />
+              </figure>
+              <div class="library__data">
+                <h4 class="heading-4">Two by Two</h4>
+                <p class="library__author">Nicholas Sparks</p>
+              </div>
+            </a>
+          </div>
+          <div class="library__book">
+            <a
+              class="library__link"
+              href="https://play.google.com/store/books/details?id=ypb9DwAAQBAJ"
+            >
+              <figure class="library__fig">
+                <img
+                  src="http://books.google.com/books/content?id=ypb9DwAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+                  alt="A Promised Land"
+                />
+              </figure>
+              <div class="library__data">
+                <h4 class="heading-4">A Promised Land</h4>
+                <p class="library__author">Barack Obama</p>
+              </div>
+            </a>
+          </div>
+          <div class="library__book">
+            <a
+              class="library__link"
+              href="https://play.google.com/store/books/details/Raynor_Winn_The_Salt_Path?id=b1lHDwAAQBAJ"
+            >
+              <figure class="library__fig">
+                <img
+                  src="http://books.google.com/books/content?id=addUygEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+                  alt="The Salt Path"
+                />
+              </figure>
+              <div class="library__data">
+                <h4 class="heading-4">The Salt Path</h4>
+                <p class="library__author">Raynor Winn</p>
+              </div>
+            </a>
+          </div> -->
+        </div>
+      </div>
+
+      <div class="footer">
+        <ul class="nav">
+          <li class="nav__item">
+            <a href="#" class="nav__link">Find your favourite book</a>
+          </li>
+          <li class="nav__item">
+            <a href="#" class="nav__link">Request proposal</a>
+          </li>
+          <li class="nav__item">
+            <a href="#" class="nav__link">Download Books</a>
+          </li>
+          <li class="nav__item">
+            <a href="#" class="nav__link">Terms and conditions</a>
+          </li>
+          <li class="nav__item">
+            <a href="#" class="nav__link">Contact us</a>
+          </li>
+          <li class="nav__item">
+            Photo by <a class="nav__link" href="https://unsplash.com/@jaredd_craig?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Jaredd Craig</a> on Unsplash
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

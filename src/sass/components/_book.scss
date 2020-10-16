@@ -1,0 +1,84 @@
+.book {
+  background-color: white;
+  grid-column: col-start 4 / full-end;
+  margin-top: 5rem;
+  padding: 7rem 6rem;
+  color: $color-gray-dark;
+  position: relative;
+  display: none;
+
+  &__content {
+    position: sticky;
+    top: 5rem;
+  }
+
+  &__title {
+    font-size: 3rem;
+    color: rgb(78, 78, 78);
+  }
+
+  &__data {
+    display: flex;
+    margin-top: 2.5rem;
+    width: 100%;
+  }
+
+  &__img {
+    height: 20rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    margin-left: 2rem;
+    margin-top: 1.2rem;
+    & > * {
+      padding: 0.4rem 0rem;
+    }
+  }
+
+  &__author {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  &__publisher,
+  &__category {
+    font-size: 1.2rem;
+  }
+
+  &__category {
+    color: $color-primary;
+  }
+
+  &__ISBN {
+    color: gray;
+  }
+
+  &__text {
+    width: 70%;
+    font-size: 1.1rem;
+  }
+
+  &__description {
+    padding-top: 3rem;
+    font-size: 1.1rem;
+  }
+
+  &__buttons {
+    margin-top: 3rem;
+    text-align: center;
+  }
+
+  &__btn--preview,
+  &__btn--buy,
+  &__btn--library {
+    border-radius: 3px;
+  }
+
+  &__btn--buy,
+  &__btn--library {
+    margin-left: 2rem;
+  }
+}

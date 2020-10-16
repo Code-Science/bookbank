@@ -1,0 +1,29 @@
+.header {
+  grid-column: full-start / full-end;
+  height: 45vh;
+
+  &__front {
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: [row1-start] 50% [row1-end row2-start] 50% [row2-end];
+  }
+}
+
+.nav {
+  grid-column: 1 / span 6;
+  grid-row: row1-start / row1-end;
+}
+
+.random-book {
+  grid-column: 7 / span 2;
+  grid-row: row1-start / row2-end;
+}
+.heading {
+  grid-column: 1 / span 6;
+  grid-row: row2-start / row2-end;
+}
+
+.search {
+  grid-column: 1 / span 8;
+}

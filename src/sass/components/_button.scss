@@ -1,0 +1,29 @@
+// BUTTON STYLING
+
+.btn {
+  cursor: pointer;
+  color: rgb(204, 202, 202);
+
+  &--gray,
+  &--pink {
+    font-size: 1.2rem;
+    padding: 0.8rem 1.2rem;
+    background-color: $color-gray-dark;
+    border: 1px solid $color-gray-dark;
+  }
+
+  &--pink {
+    color: rgb(236, 231, 231);
+    background-color: $color-primary;
+    border: 1px solid $color-primary;
+    border-radius: 4px;
+  }
+
+  &:hover {
+    color: rgb(173, 173, 173);
+  }
+
+  &--pink:hover {
+    color: rgb(204, 204, 204);
+  }
+}
