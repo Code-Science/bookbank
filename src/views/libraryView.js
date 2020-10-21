@@ -1,12 +1,6 @@
 import { elements } from './base';
 import bookImage from '../assets/book.jpg';
 
-export const toggleAddToLibraryBtn = (inLibrary) => {
-  const text = inLibrary ? 'Remove from library' : 'Add to my library';
-  const btn = document.querySelector('.book__btn--library');
-  if (btn) btn.innerText = text;
-};
-
 export const renderLibraryBooks = (book) => {
   const markup = `
         <div class="library__book">
@@ -46,6 +40,12 @@ export const deleteLibraryBook = (id) => {
   const bookElement = document.querySelector(`.library__link[href*="${id}"]`)
     .parentElement;
   if (bookElement) bookElement.parentElement.removeChild(bookElement);
+};
+
+export const toggleAddToLibraryBtn = (inLibrary) => {
+  const text = inLibrary ? 'Remove from library' : 'Add to my library';
+  const btn = document.querySelector('.book__btn--library');
+  if (btn) btn.innerText = text;
 };
 
 // If there is no Book added in library, then show below message

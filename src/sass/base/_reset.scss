@@ -1,14 +1,13 @@
 *,
 *::after,
 *::before {
-  margin: 0;
-  padding: 0;
   box-sizing: inherit;
   border: 0;
   outline: 0;
   font-size: 100%;
   vertical-align: baseline;
   background: transparent;
+  @include reset;
 }
 
 body {
@@ -47,11 +46,10 @@ q:after {
 }
 
 a {
-  margin: 0;
-  padding: 0;
   vertical-align: baseline;
   background: transparent;
   text-decoration: none;
+  @include reset;
 }
 
 hr {

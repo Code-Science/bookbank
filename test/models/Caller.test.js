@@ -1,7 +1,9 @@
-const { assert } = require('chai');
-const sinon = require('sinon');
-const axios = require('axios');
-const Caller = require('../../src/models/Caller');
+import chai from 'chai';
+import sinon from 'sinon';
+import axios from 'axios';
+import Caller from '../../src/models/Caller.js';
+
+const { assert } = chai;
 
 describe('Caller', () => {
   let caller;

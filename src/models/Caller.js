@@ -1,6 +1,6 @@
-const axios = require('axios');
+import axios from 'axios';
 
-class Caller {
+export default class Caller {
   constructor(requestObj, type) {
     this.type = type;
     if (type === 'general') {
@@ -109,5 +109,3 @@ class Caller {
     return reqObj;
   }
 }
-// export default Caller;
-module.exports = Caller;

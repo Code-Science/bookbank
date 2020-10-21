@@ -13,6 +13,4 @@ const limitString = (string, limit = 20) => {
   return string;
 };
 
-module.exports = {
-  limitString,
-};
+export default limitString;

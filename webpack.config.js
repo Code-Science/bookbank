@@ -9,6 +9,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
   },
+  mode: 'development',
   devServer: {
     contentBase: 'js/dist',
   },
@@ -38,6 +39,7 @@ module.exports = {
       },
     ],
   },
+  resolve: { alias: { sinon: 'sinon/pkg/sinon.js' } },
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',

@@ -56,4 +56,4 @@ class Library {
   }
 }
 
-module.exports = Library;
+export default Library;

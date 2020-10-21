@@ -48,7 +48,9 @@ export const renderSpinner = (parent) => {
             <span class="spinner-inner-3"></span>
        </div>
     `;
-  parent.insertAdjacentHTML('afterbegin', spinner);
+  if (parent) {
+    parent.insertAdjacentHTML('afterbegin', spinner);
+  }
 };
 
 export const clearSpinner = () => {
@@ -56,10 +58,12 @@ export const clearSpinner = () => {
   if (spinner) spinner.parentElement.removeChild(spinner);
 };
 
-elements.popupSelectedItem.insertAdjacentHTML(
-  'beforeend',
-  `<i class="fas fa-check"></i>`
-);
+if (elements.popupSelectedItem) {
+  elements.popupSelectedItem.insertAdjacentHTML(
+    'beforeend',
+    `<i class="fas fa-check"></i>`
+  );
+}
 
 // Main UI components/Pages of Application
 const mainPageElements = [

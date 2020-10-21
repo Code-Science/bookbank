@@ -5,11 +5,11 @@ body {
 
 .heading__2 {
   margin: 6rem auto;
-  color: rgb(90, 88, 88);
+  color: $color-gray-heading;
 }
 
 .message {
-  color: rgb(90, 88, 88);
+  color: $color-gray-heading;
 
   &__not-found {
     text-align: center;

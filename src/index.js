@@ -34,7 +34,7 @@ const state = {
 /*
 // GENERAL SEARCH CONTROL...........
 */
-const searchControl = async (btn) => {
+export const searchControl = async (btn) => {
   // The parameter is a button type that trigger calling this function
   let queryObj;
   if (btn === 'submit') {
@@ -93,12 +93,14 @@ const searchControl = async (btn) => {
   }
 };
 
-elements.searchForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-  resultsView.hidePaginationBtns();
-  state.startIndex = 0;
-  searchControl('submit');
-});
+if (elements.searchForm) {
+  elements.searchForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    resultsView.hidePaginationBtns();
+    state.startIndex = 0;
+    searchControl('submit');
+  });
+}
 
 // Adding event listeners on filter options of search bar.
 const filterOptionsElementsArray = Array.from(elements.popupItems);
@@ -112,7 +114,7 @@ filterOptionsElementsArray.forEach((el) => {
 //  SPECIFIC BOOK REQUEST CONTROL................
 */
 
-const specificRequestControl = async () => {
+export const specificRequestControl = async () => {
   const id = window.location.hash.replace('#', '');
   if (id) {
     bookView.clearPrevBook();
@@ -187,32 +189,38 @@ const advancedSearchControl = async () => {
   }
 };
 
-elements.advancedSearchForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-  resultsView.hidePaginationBtns();
-  state.startIndex = 0;
-  advancedSearchControl();
-});
+if (elements.advancedSearchForm) {
+  elements.advancedSearchForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    resultsView.hidePaginationBtns();
+    state.startIndex = 0;
+    advancedSearchControl();
+  });
+}
 
 /*
 // Handling the Pagination, Adding event listeners on 'More' and 'prev' buttons in results section.
 */
 
-elements.resultsMoreBtn.addEventListener('click', (event) => {
-  event.preventDefault();
-  resultsView.hidePaginationBtns();
-  state.startIndex += 10;
-  searchControl('more');
-});
+if (elements.resultsMoreBtn) {
+  elements.resultsMoreBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    resultsView.hidePaginationBtns();
+    state.startIndex += 10;
+    searchControl('more');
+  });
+}
 
-elements.resultsPrevBtn.addEventListener('click', (event) => {
-  event.preventDefault();
-  resultsView.hidePaginationBtns();
-  if (state.startIndex >= 10) {
-    state.startIndex -= 10;
-  }
-  searchControl('prev');
-});
+if (elements.resultsPrevBtn) {
+  elements.resultsPrevBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    resultsView.hidePaginationBtns();
+    if (state.startIndex >= 10) {
+      state.startIndex -= 10;
+    }
+    searchControl('prev');
+  });
+}
 
 /*
 // Handling the functionality of adding books to 'my library' and WISHLIST.
@@ -310,19 +318,21 @@ const libraryControl = (id = null) => {
    for this purpose, we will add event listener on parent element 'book' and then use the event matches method to target the 
    specific child element */
 
-elements.book.addEventListener('click', (event) => {
-  if (event.target.matches('.book__btn--library')) {
-    libraryControl();
-  }
-});
+// elements.book.addEventListener('click', (event) => {
+//   if (event.target.matches('.book__btn--library')) {
+//     libraryControl();
+//   }
+// });
 
-elements.libList.addEventListener('click', (e) => {
-  bookView.showBookView(e, 'library');
-  if (e.target.matches('.library__btn--delete')) {
-    const id = e.target.getAttribute('id');
-    libraryControl(id);
-  }
-});
+if (elements.libList) {
+  elements.libList.addEventListener('click', (e) => {
+    bookView.showBookView(e, 'library');
+    if (e.target.matches('.library__btn--delete')) {
+      const id = e.target.getAttribute('id');
+      libraryControl(id);
+    }
+  });
+}
 
 /*
 // WISHLIST CONTROL.
@@ -363,46 +373,60 @@ const wishlistControl = (id = null) => {
   }
 };
 
-elements.book.addEventListener('click', (event) => {
-  if (event.target.matches('.book__btn--wishlist')) {
-    wishlistControl();
-  }
-});
+if (elements.book) {
+  elements.book.addEventListener('click', (event) => {
+    if (event.target.matches('.book__btn--wishlist')) {
+      wishlistControl();
+    }
+    if (event.target.matches('.book__btn--library')) {
+      libraryControl();
+    }
+  });
+}
 
-elements.wishlistList.addEventListener('click', (e) => {
-  bookView.showBookView(e, 'wishlist');
-  if (e.target.matches('.wishlist__btn--delete')) {
-    const id = e.target.getAttribute('id');
-    wishlistControl(id);
-  }
-});
+if (elements.wishlistList) {
+  elements.wishlistList.addEventListener('click', (e) => {
+    bookView.showBookView(e, 'wishlist');
+    if (e.target.matches('.wishlist__btn--delete')) {
+      const id = e.target.getAttribute('id');
+      wishlistControl(id);
+    }
+  });
+}
 
 /*
    Nav Buttons Functionality
 */
 
-elements.libraryNavBtn.addEventListener('click', (event) => {
-  event.preventDefault();
-  showLibraryPage();
-});
+if (
+  elements.libraryNavBtn &&
+  elements.advancedSearchNavBtn &&
+  elements.homeNavBtn &&
+  elements.wishlistNavBtn
+) {
+  elements.libraryNavBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    showLibraryPage();
+  });
 
-elements.advancedSearchNavBtn.addEventListener('click', (event) => {
-  event.preventDefault();
-  showAdvancedSearchPage();
-});
+  elements.advancedSearchNavBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    showAdvancedSearchPage();
+  });
 
-elements.homeNavBtn.addEventListener('click', (event) => {
-  event.preventDefault();
-  showInitialPage();
-});
+  elements.homeNavBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    showInitialPage();
+  });
 
-elements.wishlistNavBtn.addEventListener('click', (event) => {
-  event.preventDefault();
-  showWishlistPage();
-});
+  elements.wishlistNavBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    showWishlistPage();
+  });
+}
 
 /*
-   Back Buttons Functionality from library and advanced search page
+   Back Buttons Functionality from library, wishlist and advanced search page
 */
 
 [
@@ -410,10 +434,12 @@ elements.wishlistNavBtn.addEventListener('click', (event) => {
   elements.btnBackAdvancedSearch,
   elements.btnBackWishlist,
 ].forEach((el) => {
-  el.addEventListener('click', (event) => {
-    event.preventDefault();
-    goBack();
-  });
+  if (el) {
+    el.addEventListener('click', (event) => {
+      event.preventDefault();
+      goBack();
+    });
+  }
 });
 
 /*

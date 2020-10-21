@@ -1,7 +1,6 @@
 import { elements, advancedSearchInputs } from './base';
 import bookImage from '../assets/book.jpg';
-
-const { limitString } = require('../utilities');
+import limitString from '../utilities';
 
 export const getkeywords = (type = 'simple') => {
   if (type === 'advanced') {
@@ -11,7 +10,6 @@ export const getkeywords = (type = 'simple') => {
   return elements.searchInput.value;
 };
 
-// export const getOptionalParams = () =>
 export const clearInput = () => {
   elements.searchInput.value = '';
 };

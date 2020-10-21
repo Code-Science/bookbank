@@ -1,0 +1,9 @@
+@mixin reset {
+  margin: 0;
+  padding: 0;
+}
+
+@mixin allWidthHeight {
+  width: 100%;
+  height: 100%;
+}
